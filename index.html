@@ -659,7 +659,7 @@ async function Login(){
 
 
 
-            var all = `http://invitadigital.mywebcommunity.org/all.php?cliente_id=1`;
+            var all = `http://invitadigital.mywebcommunity.org/all.php?cliente_id=1&r=${Math.random()}`;
             function procesarRespuesta(data) {
                 $("#exampleModal").html(data);
             }
