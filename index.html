@@ -447,6 +447,8 @@
 
 
 
+    <button type="button" class="btn btn-primary p_5" onclick="compartir()"><span class="material-icons">reply</span></button>
+    
 
 
 
@@ -768,6 +770,31 @@ function deleteFam(familia){
 
 
  
+}
+
+
+function compartir(){
+    // Crear el botón dinámicamente
+    const boton = document.createElement('button');
+    boton.id = 'miBoton';
+    boton.className = 'd_none';
+    boton.textContent = 'Compartir WhatsApp';
+    
+    // Agregar al final del body
+    document.body.appendChild(boton);
+    
+    const mensaje = "¡Hola! Te comparto este enlace: https://midominio.com";
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+    
+    boton.addEventListener('click', function() {
+        window.open(whatsappUrl, '_blank');
+        
+        // Eliminar el botón después de usarlo
+        boton.remove();
+    });
+    
+    // Hacer click automáticamente
+    boton.click();
 }
 
 
