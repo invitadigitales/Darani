@@ -201,12 +201,6 @@
 
 
 
-.d_block{
-    display: block;
-}
-.d_iflex{
-    display: inline-flex;
-}
 
 .jc_center{
     justify-content: center;
@@ -4907,4 +4901,15 @@ h4 {
 
 .liststyle_none{
     list-style: none;
+}
+
+.d_none{
+    display: none !important;
+}
+
+.d_block{
+    display: block;
+}
+.d_iflex{
+    display: inline-flex;
 }
