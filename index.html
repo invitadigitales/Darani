@@ -387,6 +387,13 @@
         <div class="pst_relative zdex_10 mt_80" id="acces">
             <div class="pst_relative bg_white pt_70 px_20 text_center color_black">
                 <img class="pst_absolute top_0 hpx_100 tra_x50 zdex_20 w_120" src="golden_raya.png">
+
+                
+                <h1 class="m_0 font_paris  fspx_50 line_height_40  color_red" id="txt_famlia">- - - - -</h1><br>
+                <h1 class="font_charm text_center fspx_25 m_0 mb_10 color_black">Le invitamos cordialmente</h1>
+                <h1 class="font_bold text_center fspx_20 m_0 mb_25 color_red text_uppercase">pase para <span id="txt_personas">- - - - -</span></h1>
+
+
                 <h1 class="m_0 font_airthay fspx_70 line_height_40  color_black">¡Te esperamos!</h1><br>
                 <h1 class="font_charm text_center fspx_20 m_0 mb_20 color_black text_uppercase">Por favor, confirma tu asistencia</h1>
                 <a class="font_charm fspx_20 my_btn no_link color_black px_20 py_10 d_block 
@@ -569,7 +576,53 @@ class UrlParams {  constructor() { this.params = new URLSearchParams(window.loca
 const url = new UrlParams();
 var invitado = url.get('invitado');
 
-if(invitado!=null){}else{
+if(invitado!=null){
+
+     
+
+
+ 
+
+    var link = `http://invitadigital.mywebcommunity.org/show.php?cliente_id=1&familia=${invitado}`;
+    function procesarRespuesta(data) {
+
+        var data = JSON.parse(data);
+
+        if (data.message == false) {
+            window.location.href = "./";
+        } else {
+
+            $("#txt_famlia").html(toTitleCase(data.message.familia));
+
+            var n  =data.message.num_invitados;
+            var str = "";
+            if(n>1){
+                str = str +n+" personas";
+            }else{
+                str = str +n+" persona";
+            }
+            $("#txt_personas").html(str);
+
+            console.log(data.message);
+            //$("#exampleModal").html(data);
+        }
+    }
+    fetch(url)
+    .then(response => response.text())
+    .then(data => procesarRespuesta(data))
+    .catch(error => {
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(link)}`;
+        return fetch(proxyUrl)
+        .then(response => response.text())
+        .then(data => procesarRespuesta(data));
+    });
+    
+
+
+
+
+
+}else{
     $("*#acces").addClass("d_none");
     $("*#no_acces").removeClass("d_none");
 }
@@ -789,6 +842,13 @@ function compartirWat(familia){
     boton.click();
 }
 
+
+function toTitleCase(str) {
+    return str
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+}
 
 
 
