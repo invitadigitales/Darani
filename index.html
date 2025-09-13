@@ -740,6 +740,28 @@ function deleteFam(familia){
         `;
     }
 
+
+    Toastify({
+        text: "Borrado ",
+        duration: 1000,
+        backgroundColor: "#4CAF50"
+    }).showToast();
+
+
+    var url = `http://invitadigital.mywebcommunity.org/update.php?cliente_id=1&tipo=0&familia=${familia}`;
+    function procesarRespuesta(data) {}
+    fetch(url)
+    .then(response => response.text())
+    .then(data => procesarRespuesta(data))
+    .catch(error => {
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        return fetch(proxyUrl)
+        .then(response => response.text())
+        .then(data => procesarRespuesta(data));
+    });
+
+
+
  
 }
 
