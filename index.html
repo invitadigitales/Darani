@@ -657,7 +657,32 @@ async function Login(){
         if (data == 'exito') {
 
 
+
+
             var all = `http://invitadigital.mywebcommunity.org/all.php?cliente_id=1`;
+            function procesarRespuesta(data) {
+                $("#exampleModal").html(data);
+            }
+            fetch(all)
+            .then(response => response.text())
+            .then(data => {
+                procesarRespuesta(data);
+                // Código adicional después de procesar la respuesta
+                console.log('Respuesta procesada exitosamente');
+            })
+            .catch(error => {
+                console.log('Error en fetch directo, intentando con proxy...');
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(all)}`;
+                return fetch(proxyUrl)
+                .then(response => response.text())
+                .then(data => {
+                    procesarRespuesta(data);
+                });
+            });
+
+
+
+            /*var all = `http://invitadigital.mywebcommunity.org/all.php?cliente_id=1`;
             function procesarRespuesta(data) {
 
                 $("#exampleModal").html(data);
@@ -671,7 +696,7 @@ async function Login(){
                 return fetch(proxyUrl)
                 .then(response => response.text())
                 .then(data => procesarRespuesta(data));
-            });
+            });*/
 
 
         }
