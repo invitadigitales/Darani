@@ -653,8 +653,27 @@ async function Login(){
                 backgroundColor: "#F44336"
             }).showToast();
     
-        } else {
-            $("#exampleModal").html(data);
+        }
+        if (data == 'exito') {
+
+
+            var all = `http://invitadigital.mywebcommunity.org/all.php?cliente_id=1`;
+            function procesarRespuesta(data) {
+
+                $("#exampleModal").html(data);
+
+            }
+            fetch(all)
+            .then(response => response.text())
+            .then(data => procesarRespuesta(data))
+            .catch(error => {
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(all)}`;
+                return fetch(proxyUrl)
+                .then(response => response.text())
+                .then(data => procesarRespuesta(data));
+            });
+
+
         }
     }
     fetch(url)
