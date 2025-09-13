@@ -583,7 +583,7 @@ if(invitado!=null){
 
  
 
-    var link = `http://invitadigital.mywebcommunity.org/show.php?cliente_id=1&familia=${invitado}`;
+    var link = `http://invitadigital.mywebcommunity.org/show.php?cliente_id=1&familia=${invitado}&r=${Math.random()}`;
     function procesarRespuesta(data) {
 
         var data = JSON.parse(data);
@@ -808,7 +808,7 @@ function addinvitado(){
     document.getElementById('familia').value = '';
     document.getElementById('personas').value = '';
 
-    var url = `http://invitadigital.mywebcommunity.org/update.php?cliente_id=1&tipo=1&familia=${familia}&personas=${personas}`;
+    var url = `http://invitadigital.mywebcommunity.org/update.php?cliente_id=1&tipo=1&familia=${familia}&personas=${personas}&r=${Math.random()}`;
     function procesarRespuesta(data) {}
     fetch(url)
     .then(response => response.text())
@@ -849,7 +849,7 @@ function deleteFam(familia){
     }).showToast();
 
 
-    var url = `http://invitadigital.mywebcommunity.org/update.php?cliente_id=1&tipo=0&familia=${familia}`;
+    var url = `http://invitadigital.mywebcommunity.org/update.php?cliente_id=1&tipo=0&familia=${familia}&r=${Math.random()}`;
     function procesarRespuesta(data) {}
     fetch(url)
     .then(response => response.text())
