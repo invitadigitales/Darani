@@ -447,9 +447,6 @@
 
 
 
-    <button type="button" class="btn btn-primary p_5" onclick="compartir()"><span class="material-icons">reply</span></button>
-    
-
 
 
 
@@ -699,7 +696,7 @@ function addinvitado(){
             <td>${familia}</td>
             <td>${personas}</td>
             <td class="text_center">
-                <button type="button" class="btn btn-primary p_5"><span class="material-icons">reply</span></button>
+                <button type="button" class="btn btn-primary p_5" onclick="compartirWat("${familia}")"><span class="material-icons">reply</span></button>
                 <button type="button" class="btn btn-danger p_5" onclick="deleteFam('${familia}')"><span class="material-icons">delete</span></button>
             </td>
         </tr>
@@ -773,27 +770,22 @@ function deleteFam(familia){
 }
 
 
-function compartir(){
-    // Crear el botón dinámicamente
+function compartirWat(familia){
     const boton = document.createElement('button');
     boton.id = 'miBoton';
     boton.className = 'd_none';
     boton.textContent = 'Compartir WhatsApp';
-    
-    // Agregar al final del body
     document.body.appendChild(boton);
     
-    const mensaje = "¡Hola! Te comparto este enlace: https://midominio.com";
+    // Codificar la familia para evitar problemas con espacios
+    const familiaCodeada = encodeURIComponent(familia);
+    const mensaje = "https://invitadigitales.github.io/Darani/?invitado=" + familiaCodeada;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
     
     boton.addEventListener('click', function() {
         window.open(whatsappUrl, '_blank');
-        
-        // Eliminar el botón después de usarlo
         boton.remove();
     });
-    
-    // Hacer click automáticamente
     boton.click();
 }
 
